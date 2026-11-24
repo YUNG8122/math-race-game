@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шпаргалка | MathRace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">📖 Шпаргалка</div>
+        <div style="display:flex; gap:10px;">
+            <button id="theme-toggle" class="btn-secondary">🌙 Тема</button>
+            <a href="/" class="back-link">← В Лобби</a>
+        </div>
+    </header>
+    
+    <main class="container" style="align-items:flex-start; padding-top: 40px;">
+        <section class="card" style="max-width: 800px;">
+            <h1 class="text-center" style="margin-bottom:30px;">Основные формулы</h1>
+            
+            <div class="cheat-grid">
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" rx="4" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6"/></svg></div>
+                    <div><b>Квадрат</b><span>S = a²</span><span>P = 4 · a</span></div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="40" rx="4" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6"/></svg></div>
+                    <div><b>Прямоугольник</b><span>S = a · b</span><span>P = 2 · (a + b)</span></div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><polygon points="50,20 85,80 15,80" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6" stroke-linejoin="round"/></svg></div>
+                    <div><b>Треугольник</b><span>S = (a · h) / 2</span><span>P = a + b + c</span></div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6"/></svg></div>
+                    <div><b>Круг</b><span>S = π · R²</span><span>C = 2 · π · R</span></div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><polygon points="30,25 70,25 85,75 15,75" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6" stroke-linejoin="round"/></svg></div>
+                    <div><b>Трапеция</b><span>S = ((a + b) / 2) · h</span></div>
+                </div>
+                <div class="cheat-item">
+                    <div class="cheat-icon"><svg viewBox="0 0 100 100"><polygon points="50,15 85,50 50,85 15,50" fill="rgba(79,70,229,.05)" stroke="#4f46e5" stroke-width="6" stroke-linejoin="round"/></svg></div>
+                    <div><b>Ромб</b><span>S = (d1 · d2) / 2</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>const PAGE_TYPE = 'CHEATSHEET';</script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

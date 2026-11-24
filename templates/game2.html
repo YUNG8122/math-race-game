@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Найди Ошибку</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">🕵️ Найди Ошибку</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span id="lives-display" style="font-size:20px;">❤️❤️❤️</span>
+            <a href="/" class="back-link">← В Лобби</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="welcome-screen" class="card text-center animate__animated animate__zoomIn" style="max-width: 800px;">
+            <h1>Найди Ошибку</h1>
+            <p class="subtitle">Выбери раунд, чтобы начать</p>
+            <div class="levels-grid">
+                <button class="level-btn" data-level="1"><span class="level-num">1</span><span class="level-title">Формулы</span></button>
+                <button class="level-btn" data-level="2"><span class="level-num">2</span><span class="level-title">Вычисления</span></button>
+                <button class="level-btn" data-level="3"><span class="level-num">3</span><span class="level-title">Решения</span></button>
+            </div>
+        </section>
+
+        <section id="game-screen" class="card" style="display:none;">
+            <div class="hud">
+                <div class="hud-item"><span class="hud-label">Очки</span><span class="hud-value" id="score-correct">0</span></div>
+                <div class="hud-item"><span class="hud-label">Прогресс</span><span class="hud-value" id="q-progress">1/6</span></div>
+            </div>
+            <div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
+            <div class="game-area single-col">
+                <div class="shape-panel" style="margin-bottom: 20px;">
+                    <div id="shape-display" class="shape-svg"></div>
+                    <div id="question-text" class="q-text"></div>
+                </div>
+                <div id="formulas-container" class="formulas-grid"></div>
+            </div>
+        </section>
+
+        <section id="results-screen" class="card text-center" style="display: none;">
+            <div style="font-size: 56px; margin-bottom: 10px;">🏆</div>
+            <h2 class="res-title" style="font-size: 30px;">Раунд окончен!</h2>
+            <p id="game-over-reason" style="color:var(--danger); font-weight:700; margin-bottom:25px;"></p>
+            <div class="result-stats" style="justify-content: center; margin-bottom: 30px;">
+                <div class="stat-box" style="min-width: 180px;"><span class="stat-val" id="final-score">0</span><span class="stat-lbl">Очков</span></div>
+            </div>
+            <button id="copy-btn" class="btn-primary" style="width: 100%; max-width: 350px; margin: 0 auto 25px auto; padding: 16px;">📋 Скопировать результат</button>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="restart-btn" class="btn-primary" style="width: auto; padding: 14px 28px;">Играть снова</button>
+                <a href="/" class="btn-secondary" style="padding: 14px 28px;">В Лобби</a>
+            </div>
+        </section>
+    </main>
+    <script>const PAGE_TYPE = 'GAME2'; const USERNAME = "{{ session.get('username', 'Гость') }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

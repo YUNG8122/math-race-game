@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathRace | Лобби</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header animate__animated animate__fadeInDown">
+                <!-- Вместо старого логотипа ставим этот -->
+        <div class="logo">
+                        <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 8h16M9 8v12M15 8v12"/>
+                </svg>
+            </div>
+            </div>
+            <span class="logo-text">MathRace</span>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if not session.get('username') %}
+        <!-- ЭКРАН ВХОДА -->
+        <section class="card text-center animate__animated animate__zoomIn" style="max-width: 400px;">
+            <h1>Вход</h1>
+            <p class="subtitle">Введи имя, чтобы сохранять прогресс</p>
+            <div class="input-group"><input type="text" id="login-name" placeholder="Иванов Иван" maxlength="30"></div>
+            <button id="login-btn" class="btn-primary">Войти</button>
+        </section>
+                {% else %}
+        <div class="dashboard-grid animate__animated animate__fadeInUp">
+            
+            <!-- ЛЕВАЯ КОЛОНКА -->
+            <div class="sidebar">
+                <!-- Профиль -->
+                <div class="profile-card">
+                    <div class="avatar">{{ session['username'][0]|upper }}</div>
+                    <div class="profile-info">
+                        <h2>{{ session['username'].split(' ')[0] }}</h2>
+                        <p>Готов к рекордам?</p>
+                    </div>
+                    <a href="/logout" class="btn-logout" title="Выйти">➔</a>
+                </div>
+
+                <!-- Статистика -->
+                <div class="stats-card">
+                    <h3>📊 Твоя статистика</h3>
+                    <div class="stat-row"><span>Игр пройдено:</span> <b>12</b></div>
+                    <div class="stat-row"><span>Лучший стрик:</span> <b>x5</b></div>
+                    <div class="stat-row"><span>Место в школе:</span> <b>#3</b></div>
+                </div>
+
+                <!-- Ежедневный вызов -->
+                <div class="daily-challenge">
+                    <div class="daily-header">
+                        <span>💡</span>
+                        <b>Формула дня</b>
+                    </div>
+                    <div class="formula-text" id="daily-formula">Загрузка...</div>
+                    <button id="check-formula-btn" class="btn-primary" style="padding: 10px; font-size: 14px;">Узнать ответ</button>
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ КОЛОНКА (ИГРЫ) -->
+            <div class="main-games">
+                <h1 style="text-align:left; font-size: 28px; margin-bottom: 20px;">Выбирай режим</h1>
+                
+                <div class="games-grid">
+                    <!-- Игра 1 -->
+                    <div class="game-card game-1" onclick="window.location.href='/game1'">
+                        <div class="game-icon">🏁</div>
+                        <div class="game-content">
+                            <h3>Гонка Формул</h3>
+                            <p>Проверь скорость реакции на время</p>
+                            <button class="btn-play">Играть</button>
+                        </div>
+                    </div>
+
+                    <!-- Игра 2 -->
+                    <div class="game-card game-2" onclick="window.location.href='/game2'">
+                        <div class="game-icon">🕵️</div>
+                        <div class="game-content">
+                            <h3>Найди Ошибку</h3>
+                            <p>Исправь неверные формулы и вычисления</p>
+                            <button class="btn-play">Играть</button>
+                        </div>
+                    </div>
+
+                    <!-- Игра 3 -->
+                    <div class="game-card game-3" onclick="window.location.href='/game3'">
+                        <div class="game-icon">⚡</div>
+                        <div class="game-content">
+                            <h3>Математический Блиц</h3>
+                            <p>Посчитай площадь фигур по клеткам</p>
+                            <button class="btn-play">Играть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+    </main>
+    
+    <script>const PAGE_TYPE = 'LOBBY';</script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

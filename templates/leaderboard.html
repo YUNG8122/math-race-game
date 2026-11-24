@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг | MathRace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">🏆 Зал Славы</div>
+        <div style="display:flex; gap:10px;">
+            <button id="theme-toggle" class="btn-secondary">🌙 Тема</button>
+            <a href="/" class="back-link">← В Лобби</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="card animate__animated animate__fadeInUp" style="max-width: 1000px;">
+            <h1 class="text-center" style="margin-bottom:30px;">Лучшие игроки</h1>
+            
+            <div class="lb-grid" id="leaderboard-container">
+                <!-- Колонка 1: Гонка -->
+                <div class="lb-col">
+                    <h3 style="text-align:center; color:var(--primary); margin-bottom:20px;">🏁 Гонка Формул</h3>
+                    <div id="lb-1"><div class="lb-loading">Загрузка...</div></div>
+                </div>
+                
+                <!-- Колонка 2: Найди ошибку -->
+                <div class="lb-col">
+                    <h3 style="text-align:center; color:var(--primary); margin-bottom:20px;">🕵️ Найди Ошибку</h3>
+                    <div id="lb-2"><div class="lb-loading">Загрузка...</div></div>
+                </div>
+                
+                <!-- Колонка 3: Блиц -->
+                <div class="lb-col">
+                    <h3 style="text-align:center; color:var(--primary); margin-bottom:20px;">⚡ Блиц</h3>
+                    <div id="lb-3"><div class="lb-loading">Загрузка...</div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>const PAGE_TYPE = 'LEADERBOARD';</script>
+    <script src="https://cdn.jsdelivr.net/npm/@formkit/auto-animate@1.0.0-beta.1/index.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

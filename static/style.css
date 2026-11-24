@@ -1,0 +1,566 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+/* =========================================
+   1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================= */
+:root {
+    --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+    --card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --accent: #06b6d4;
+    --border: rgba(79, 70, 229, 0.15);
+    --success: #10b981;
+    --danger: #ef4444;
+    --shadow-lg: 0 10px 30px rgba(79, 70, 229, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --trans: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Темная тема */
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; -webkit-font-smoothing: antialiased; }
+
+body { 
+    background: var(--bg-gradient); 
+    background-attachment: fixed; 
+    color: var(--text-main); 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    transition: background 0.4s ease;
+}
+
+/* =========================================
+   2. ШАПКА И КОНТЕЙНЕРЫ
+   ========================================= */
+.app-header { 
+    padding: 20px 60px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 1px solid var(--border); 
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
+[data-theme="dark"] .app-header { background: rgba(15, 23, 42, 0.6); }
+
+.logo { 
+    font-size: 24px; 
+    font-weight: 800; 
+    background: linear-gradient(to right, var(--primary), var(--accent)); 
+    -webkit-background-clip: text; 
+    background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.back-link { color: var(--text-muted); text-decoration: none; font-size: 16px; transition: var(--trans); font-weight: 600; }
+.back-link:hover { color: var(--primary); }
+
+.container { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; /* ВОТ ЭТА СТРОКА ИСПРАВИТ ВСЁ */
+    justify-content: center; 
+    align-items: center; 
+    padding: 40px 20px; 
+    width: 100%; 
+}
+
+/* =========================================
+   3. КАРТОЧКИ И ТЕКСТ
+   ========================================= */
+.card { 
+    background: var(--card); 
+    backdrop-filter: blur(12px); 
+    border-radius: 24px; 
+    padding: 40px; 
+    border: 1px solid var(--border); 
+    box-shadow: var(--shadow-lg); 
+    width: 100%; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+h1 { font-size: 36px; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+.subtitle { font-size: 16px; color: var(--text-muted); margin-bottom: 30px; font-weight: 500; }
+.text-center { text-align: center; }
+
+/* =========================================
+   4. ФОРМЫ И КНОПКИ
+   ========================================= */
+.input-group input { 
+    width: 100%; max-width: 400px; margin: 0 auto 20px auto; display: block; 
+    padding: 16px 20px; background: #ffffff; border: 2px solid var(--border); 
+    border-radius: 12px; color: var(--text-main); font-size: 16px; outline: none; 
+    transition: var(--trans); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); 
+}
+[data-theme="dark"] .input-group input { background: rgba(0,0,0,0.2); }
+.input-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+
+.btn-primary { 
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); 
+    color: white; border: none; padding: 16px 32px; border-radius: 12px; 
+    font-size: 18px; font-weight: 600; cursor: pointer; transition: var(--trans); 
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); display: inline-block; 
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4); filter: brightness(1.1); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.btn-secondary { 
+    background: #ffffff; color: var(--primary); border: 1px solid var(--border); 
+    padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 15px; 
+    font-weight: 600; transition: var(--trans); display: inline-flex; align-items: center; 
+    justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
+}
+[data-theme="dark"] .btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-main); }
+.btn-secondary:hover { border-color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+/* =========================================
+   5. ГЛАВНЫЙ ЭКРАН (ЛОББИ)
+   ========================================= */
+.dashboard-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    background: var(--card); padding: 30px 40px; border-radius: 24px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border: 1px solid var(--border); 
+    margin-bottom: 20px; width: 100%;
+}
+
+.user-profile-header { display: flex; align-items: center; gap: 20px; }
+
+.avatar { 
+    width: 70px; height: 70px; border-radius: 50%; 
+    background: linear-gradient(135deg, var(--primary), var(--accent)); 
+    color: white; display: flex; justify-content: center; align-items: center; 
+    font-size: 32px; font-weight: 800; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2); flex-shrink: 0; 
+}
+
+.user-info h1 { font-size: 28px; font-weight: 800; margin: 0 0 5px 0; text-align: left; }
+.user-info p { color: var(--text-muted); font-size: 16px; margin: 0; }
+
+/* Формула дня */
+.daily-task-card { 
+    background: var(--card); border: 2px dashed var(--border); 
+    padding: 20px 30px; border-radius: 20px; display: flex; align-items: center; 
+    gap: 20px; margin-bottom: 30px; transition: var(--trans); width: 100%;
+}
+.daily-task-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.daily-icon { 
+    font-size: 40px; background: rgba(79, 70, 229, 0.1); width: 70px; height: 70px; 
+    display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-shrink: 0;
+}
+.daily-text { display: flex; flex-direction: column; text-align: left; }
+.daily-text b { color: var(--primary); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.daily-text span { font-size: 22px; font-weight: 800; color: var(--text-main); }
+
+/* Карточки игр */
+.games-dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; margin-bottom: 20px; }
+.game-card { 
+    background: var(--card); border: 1px solid var(--border); border-radius: 20px; 
+    padding: 30px; text-align: center; cursor: pointer; transition: var(--trans); 
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.05); 
+}
+.game-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 30px rgba(79, 70, 229, 0.15); }
+.game-icon { font-size: 48px; margin-bottom: 15px; }
+.game-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.game-card p { font-size: 14px; color: var(--text-muted); }
+
+/* =========================================
+   6. ИНТЕРФЕЙС ИГР
+   ========================================= */
+.hud { display: flex; justify-content: space-between; background: rgba(0,0,0,0.02); border-radius: 16px; padding: 20px; margin-bottom: 24px; border: 1px solid var(--border); }
+[data-theme="dark"] .hud { background: rgba(0,0,0,0.2); }
+.hud-item { text-align: center; flex: 1; }
+.hud-label { display: block; font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 5px; font-weight: 700; }
+.hud-value { font-size: 24px; font-weight: 800; color: var(--primary); }
+
+.progress-bar-container { width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
+[data-theme="dark"] .progress-bar-container { background: rgba(255,255,255,0.1); }
+.progress-bar { height: 100%; background: linear-gradient(to right, var(--primary), var(--accent)); transition: width 0.3s ease; }
+
+.game-area { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; }
+.game-area.single-col { grid-template-columns: 1fr; }
+.shape-svg { width: 100%; height: 160px; display: flex; justify-content: center; align-items: center; background: #ffffff; border-radius: 16px; border: 2px dashed var(--border); }
+[data-theme="dark"] .shape-svg { background: rgba(0,0,0,0.2); }
+.shape-svg svg { max-height: 100%; width: auto; }
+.q-text { text-align: center; font-size: 20px; margin-top: 16px; font-weight: 700; }
+
+.formulas-grid { display: flex; flex-direction: column; gap: 12px; }
+.formula-btn { 
+    background: #ffffff; border: 2px solid var(--border); padding: 18px 24px; 
+    border-radius: 12px; color: var(--text-main); font-size: 18px; font-weight: 600; 
+    text-align: left; cursor: pointer; transition: var(--trans); width: 100%; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02); 
+}
+[data-theme="dark"] .formula-btn { background: rgba(255,255,255,0.03); }
+.formula-btn:hover:not(:disabled) { border-color: var(--primary); transform: translateX(5px); box-shadow: 0 5px 15px rgba(79, 70, 229, 0.1); }
+.formula-btn.correct { background: rgba(16, 185, 129, 0.1); border-color: var(--success); color: var(--success); }
+.formula-btn.wrong { background: rgba(239, 68, 68, 0.1); border-color: var(--danger); color: var(--danger); }
+
+/* Кнопки выбора раундов */
+.levels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+.level-btn { background: var(--card); border: 2px solid var(--border); border-radius: 16px; padding: 20px; cursor: pointer; transition: var(--trans); display: flex; flex-direction: column; align-items: center; color: var(--text-main); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+.level-btn:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1); }
+.level-num { font-size: 32px; font-weight: 800; color: var(--primary); }
+.level-title { font-size: 18px; font-weight: 700; margin-top: 5px; }
+.level-desc { font-size: 14px; color: var(--text-muted); text-align: center; margin-top: 5px; }
+
+/* =========================================
+   7. ИГРА 3 (БЛИЦ) И РУЛЕТКА
+   ========================================= */
+.blitz-area { background: var(--card); border: 1px solid var(--border); background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px); background-size: 30px 30px; border-radius: 20px; padding: 30px; display: flex; flex-direction: column; align-items: center; min-height: 400px; justify-content: center; box-shadow: inset 0 2px 10px rgba(0,0,0,0.02); }
+[data-theme="dark"] .blitz-area { background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); }
+
+.wheel-wrapper { position: relative; width: 220px; height: 220px; margin: 0 auto; }
+.wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid var(--danger); z-index: 10; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.wheel { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#4f46e5 0 45deg, #06b6d4 45deg 90deg, #8b5cf6 90deg 135deg, #ec4899 135deg 180deg, #f59e0b 180deg 225deg, #10b981 225deg 270deg, #3b82f6 270deg 315deg, #ef4444 315deg 360deg); border: 8px solid var(--card); box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.spinning { animation: spin-wheel 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+@keyframes spin-wheel { 0% { transform: rotate(0deg); } 100% { transform: rotate(1440deg); } }
+.wheel-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--card); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: 800; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 5; }
+
+.grid-container { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; max-width: 400px; background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+.answer-input { width: 100%; max-width: 250px; padding: 15px; font-size: 28px; text-align: center; border: 2px solid var(--border); border-radius: 12px; font-weight: 800; outline: none; background: rgba(0,0,0,0.02); color: var(--primary); margin: 0; }
+[data-theme="dark"] .answer-input { background: rgba(0,0,0,0.2); }
+#submit-answer-btn { width: 100%; max-width: 250px; margin: 0; }
+
+/* =========================================
+   8. МОДАЛЬНЫЕ ОКНА И РЕЗУЛЬТАТЫ
+   ========================================= */
+.modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+.modal-content { background: var(--card); border: 1px solid var(--border); padding: 40px; border-radius: 24px; max-width: 500px; width: 90%; text-align: center; box-shadow: var(--shadow-lg); }
+
+.result-stats { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
+.stat-box { background: rgba(0,0,0,0.02); padding: 20px 40px; border-radius: 16px; border: 1px solid var(--border); }
+[data-theme="dark"] .stat-box { background: rgba(0,0,0,0.2); }
+.stat-val { display: block; font-size: 32px; font-weight: 800; color: var(--primary); }
+.stat-lbl { font-size: 14px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+
+/* =========================================
+   9. ШПАРГАЛКА
+   ========================================= */
+.cheat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.cheat-item { display: flex; align-items: center; gap: 15px; background: var(--card); padding: 15px; border-radius: 12px; border: 1px solid var(--border); transition: var(--trans); }
+.cheat-item:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(79, 70, 229, 0.1); }
+.cheat-icon { width: 60px; height: 60px; flex-shrink: 0; }
+.cheat-icon svg { width: 100%; height: 100%; }
+.cheat-item div:last-child { display: flex; flex-direction: column; font-size: 15px; line-height: 1.4; font-weight: 600; }
+.cheat-item b { color: var(--primary); font-size: 18px; margin-bottom: 2px; }
+.cheat-item span { color: var(--text-muted); }
+
+/* =========================================
+   10. МАТЕМАТИЧЕСКИЕ ДРОБИ И ИНДЕКСЫ
+   ========================================= */
+sub { font-size: 0.7em; vertical-align: sub; line-height: 0; }
+.math-fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 6px; line-height: 1.1; position: relative; top: -0.1em; font-size: 0.95em; }
+.math-fraction .num { border-bottom: 2px solid currentColor; padding: 0 4px 2px 4px; }
+.math-fraction .den { padding: 2px 4px 0 4px; }
+
+/* =========================================
+   11. АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ
+   ========================================= */
+@media (max-width: 768px) {
+    .app-header { padding: 15px 20px; }
+    .dashboard-header { flex-direction: column; align-items: flex-start; gap: 20px; padding: 20px; }
+    .user-profile-header { flex-direction: row; align-items: center; }
+    .games-dashboard { grid-template-columns: 1fr; }
+    .game-area { grid-template-columns: 1fr; }
+    .levels-grid { grid-template-columns: 1fr; }
+    .result-stats { flex-direction: column; align-items: center; }
+    .cheat-grid { grid-template-columns: 1fr; }
+    .link-input-group { flex-direction: column; }
+}
+
+/* Обертка для главного экрана */
+.lobby-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- СЕТКА ДЛЯ ЗАЛА СЛАВЫ --- */
+.lb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.lb-col {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+[data-theme="dark"] .lb-col {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* На телефонах колонки встают друг под другом */
+@media (max-width: 768px) {
+    .lb-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- ПРОФЕССИОНАЛЬНЫЙ ДАШБОРД --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* Левая колонка */
+.sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+.profile-card, .stats-card, .daily-challenge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+.profile-card .avatar {
+    width: 55px; height: 55px; font-size: 24px;
+}
+.profile-info h2 { font-size: 20px; margin: 0; color: var(--text-main); }
+.profile-info p { font-size: 13px; margin: 0; color: var(--text-muted); }
+.btn-logout {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); text-decoration: none; font-size: 20px; transition: 0.3s;
+}
+.btn-logout:hover { color: var(--danger); }
+
+/* Статистика */
+.stats-card h3 { font-size: 15px; color: var(--text-muted); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;}
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; }
+.stat-row span { color: var(--text-muted); }
+.stat-row b { color: var(--primary); font-size: 16px; }
+
+/* Ежедневный вызов */
+.daily-challenge { background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(6, 182, 212, 0.05)); border-color: rgba(79, 70, 229, 0.2); }
+.daily-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 15px; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
+.formula-text { font-size: 24px; font-weight: 800; text-align: center; margin-bottom: 20px; color: var(--text-main); }
+
+/* Правая колонка (Сетка игр) */
+.games-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.game-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card:hover { transform: translateY(-5px); }
+.game-card.game-1:hover { box-shadow: 0 15px 30px rgba(239, 68, 68, 0.15); border-color: var(--danger); }
+.game-card.game-2:hover { box-shadow: 0 15px 30px rgba(79, 70, 229, 0.15); border-color: var(--primary); }
+.game-card.game-3:hover { box-shadow: 0 15px 30px rgba(245, 158, 11, 0.15); border-color: #f59e0b; }
+
+.game-icon {
+    font-size: 60px;
+    background: rgba(0,0,0,0.03);
+    width: 100px; height: 100px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+[data-theme="dark"] .game-icon { background: rgba(255,255,255,0.05); }
+
+.game-content { flex: 1; text-align: left; }
+.game-content h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
+.game-content p { font-size: 15px; color: var(--text-muted); margin-bottom: 15px; }
+
+.btn-play {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 8px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.game-card:hover .btn-play { background: var(--primary); color: white; }
+
+/* Мобильная адаптация */
+@media (max-width: 900px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .game-card { flex-direction: column; text-align: center; gap: 15px; }
+    .game-content { text-align: center; }
+    .game-content p { margin-bottom: 20px; }
+}
+
+/* --- ПРЕМИАЛЬНАЯ ШАПКА САЙТА --- */
+.app-header {
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Эффект матового стекла */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+[data-theme="dark"] .app-header {
+    background: rgba(30, 41, 59, 0.75);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Контейнер логотипа */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.logo:hover { transform: scale(1.02); }
+
+/* Иконка */
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    color: white;
+}
+.logo-icon svg { width: 20px; height: 20px; }
+.logo-icon path { stroke: white; fill: transparent; }
+
+/* Текст логотипа */
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(79, 70, 229, 0.1);
+}
+
+
+/* =========================================
+   МОБИЛЬНАЯ АДАПТАЦИЯ (ДЛЯ ТЕЛЕФОНОВ)
+   ========================================= */
+@media (max-width: 768px) {
+    /* 1. Шапка сайта */
+    .app-header { 
+        padding: 15px 20px; 
+        flex-wrap: wrap; /* Кнопки переносятся на новую строку, если не влезают */
+        gap: 15px;
+    }
+    .logo-text { font-size: 20px; }
+    .logo-icon { width: 30px; height: 30px; }
+    
+    /* 2. Главный экран (Дашборд) */
+    .dashboard-grid { 
+        grid-template-columns: 1fr; /* Колонки встают друг под другом */
+        gap: 20px; 
+    }
+    
+    /* Карточки игр */
+    .game-card { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 15px; 
+        padding: 20px;
+    }
+    .game-icon { width: 80px; height: 80px; font-size: 45px; }
+    .game-content { text-align: center; }
+    .game-content p { margin-bottom: 15px; }
+    .btn-play { width: 100%; }
+
+    /* 3. Экраны игр */
+    .container { padding: 20px 10px; }
+    .card { padding: 25px 15px; border-radius: 16px; }
+    .game-area { 
+        grid-template-columns: 1fr; /* Фигура и ответы встают друг под другом */
+        gap: 20px; 
+    }
+    .shape-svg { height: 130px; } /* Уменьшаем фигуру */
+    
+    /* Панель статистики в игре (Очки, Жизни, Время) */
+    .hud { 
+        flex-wrap: wrap; 
+        gap: 10px; 
+        padding: 15px; 
+    }
+    .hud-item { flex: 1 1 40%; } /* Элементы встают в 2 ряда */
+    .hud-value { font-size: 20px; }
+
+    /* Кнопки ответов */
+    .formula-btn { padding: 15px; font-size: 16px; }
+
+    /* 4. Игра 3 (Блиц) и Рулетка */
+    .blitz-area { min-height: 300px; padding: 15px; }
+    .wheel-wrapper { width: 180px; height: 180px; } /* Уменьшаем рулетку */
+    .wheel-center { width: 50px; height: 50px; font-size: 24px; }
+    .grid-container { padding: 20px 15px; }
+    .answer-input { font-size: 24px; padding: 12px; }
+    
+    /* 5. Экран результатов */
+    .result-stats { flex-direction: column; gap: 10px; }
+    .stat-box { padding: 15px; }
+    .stat-val { font-size: 28px; }
+    .teacher-link-box { padding: 15px; }
+    #copy-btn { width: 100%; }
+
+    /* 6. Рейтинг и Шпаргалка */
+    .lb-grid { grid-template-columns: 1fr; } /* 3 колонки рейтинга встают в столбик */
+    .cheat-grid { grid-template-columns: 1fr; } /* Формулы встают в столбик */
+    
+    /* 7. Кнопки навигации (Рейтинг, Тема и т.д.) */
+    .btn-secondary { font-size: 13px; padding: 10px 15px; }
+}

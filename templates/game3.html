@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блиц</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">⚡ Блиц</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <span id="lives-display" style="font-size:20px;">❤️❤️❤️</span>
+            <a href="/" class="back-link">← В Лобби</a>
+        </div>
+    </header>
+    <main class="container">
+        <section id="welcome-screen" class="card text-center animate__animated animate__zoomIn" style="max-width: 600px;">
+            <h1>Математический Блиц</h1>
+            <p class="subtitle">6 заданий. Крути колесо, считай клетки!</p>
+            <button id="start-blitz-btn" class="btn-primary" style="max-width: 300px; margin: 0 auto;">Начать игру</button>
+        </section>
+
+        <section id="game-screen" class="card" style="display:none;">
+            <div class="hud">
+                <div class="hud-item"><span class="hud-label">Счет</span><span class="hud-value" id="score">0</span></div>
+                <div class="hud-item"><span class="hud-label">Задание</span><span class="hud-value" id="q-counter">1/6</span></div>
+                <div class="hud-item"><span class="hud-label">Время</span><span class="hud-value" id="timer" style="color:var(--primary)">05:00</span></div>
+            </div>
+            <div class="progress-bar-container"><div class="progress-bar" id="progress-bar" style="width: 100%;"></div></div>
+
+            <div class="blitz-area">
+                <div id="wheel-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%;">
+                    <div class="wheel-wrapper">
+                        <div class="wheel-pointer"></div><div class="wheel" id="wheel"></div><div class="wheel-center">?</div>
+                    </div>
+                    <button id="spin-btn" class="btn-primary" style="max-width: 250px; margin: 20px auto 0 auto;">Крутить колесо</button>
+                </div>
+                <div class="grid-container" id="grid-container" style="display:none;">
+                    <div id="svg-container" style="width: 100%; margin-bottom: 15px;"></div>
+                    <div class="q-text">Посчитайте площадь фигуры (в клетках)</div>
+                    <input type="number" id="answer-input" class="answer-input" placeholder="0" step="any" autocomplete="off">
+                    <button id="submit-answer-btn" class="btn-primary" style="max-width: 260px;">Ответить</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="results-screen" class="card text-center" style="display: none;">
+            <div style="font-size: 56px; margin-bottom: 10px;">🏆</div>
+            <h2 class="res-title" style="font-size: 30px;">Блиц завершен!</h2>
+            <p id="game-over-reason" style="color:var(--danger); font-weight:700; margin-bottom:25px;"></p>
+            <div class="result-stats" style="justify-content: center; margin-bottom: 30px;">
+                <div class="stat-box" style="min-width: 180px;"><span class="stat-val" id="final-score">0</span><span class="stat-lbl">Очков</span></div>
+            </div>
+            <button id="copy-btn" class="btn-primary" style="width: 100%; max-width: 350px; margin: 0 auto 25px auto; padding: 16px;">📋 Скопировать результат</button>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="restart-btn" class="btn-primary" style="width: auto; padding: 14px 28px;">Играть снова</button>
+                <a href="/" class="btn-secondary" style="padding: 14px 28px;">В Лобби</a>
+            </div>
+        </section>
+    </main>
+    <script>const PAGE_TYPE = 'GAME3'; const USERNAME = "{{ session.get('username', 'Гость') }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
